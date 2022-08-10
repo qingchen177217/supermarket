@@ -48,12 +48,5 @@ export default {
   font-size:14px;
   margin-top: 3px;
 }
-img{
-    width: 24px;
-    height: 24px;
-    vertical-align:middle;
-}
-/* .active{
-    color:red;
-} */
+
 </style>

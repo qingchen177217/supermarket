@@ -4,7 +4,7 @@
     /* 下面是定义的变量 */
     /* 使用：font-size:var(--line-height) */
     --color-text: #666;
-    --color-hign-text: #ff5777;
+    --color-height-text: #ff5777;
     --color-tint: #ff8198;
     --color-background: #fff;
     --font-size: 14px;
@@ -29,7 +29,6 @@ body {
     user-select: none;
     /*禁止用户鼠标在页面上选中文字图片等*/
     background: var(--color-background);
-    color: var(--color-text);
     width: 100vw;
     padding: 0;
     margin: 0;
