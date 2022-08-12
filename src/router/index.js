@@ -11,6 +11,8 @@ const cart = () =>
     import ('../views/cart/cart')
 const profile = () =>
     import ('../views/profile/profile')
+const detail = () =>
+    import ('../views/detail/Detail')
 
 // 2.创建路由对象
 const routes = [{
@@ -29,6 +31,9 @@ const routes = [{
     }, {
         path: '/profile',
         component: profile
+    }, {
+        path: '/detail/:iid',
+        component: detail
     }
 ]
 

@@ -1,6 +1,6 @@
 <template>
-   <div class="goodsitem">
-    <img :src="goodsItem.show.img" alt="">
+   <div class="goodsitem" @click="itemclick">
+    <img :src="goodsItem.show.img" alt="" @load="imgLoad">
     <div class="goodsitem-font">
         <p>{{goodsItem.title}}</p>
         <span class="price">￥{{goodsItem.price}}</span>
@@ -20,14 +20,23 @@ export default {
         return {}
        }
     }
+  },
+  methods:{
+    imgLoad(){
+        this.$bus.$emit('itemImageLoad')
+    },
+    itemclick(){
+       this.$router.push('/detail/'+this.goodsItem.iid)
+    }
   }
 }
 </script>
 <style> 
       .goodsitem{
-        padding-bottom:93px;
+        padding-bottom:88px;
         width: 47%;
         position:relative;
+        margin-bottom:15px;
       }
       .goods img{
         width: 100%;
@@ -79,7 +88,7 @@ export default {
         border-radius:5px;
         color:white;
         font-size:14px;
-        margin:5px 0 15px 0;
+        margin:5px 0 0 0;
       }
       .bottom::before{
         content:'';
