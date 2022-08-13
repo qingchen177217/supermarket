@@ -1,5 +1,5 @@
 <template>
-   <div class="wrapper" ref="wrapper">
+   <div  class="wrapper" ref="wrapper">
     <div class="content">
         <slot>
 
@@ -9,7 +9,14 @@
 </template>
 
 <script>
-import bscroll from 'better-scroll';
+import Bscroll from '@better-scroll/core';
+import Pullup from '@better-scroll/pull-up';
+import ObserveImage from '@better-scroll/observe-image';
+import ObserveDOM from '@better-scroll/observe-dom';
+
+Bscroll.use(ObserveDOM)
+Bscroll.use(ObserveImage)
+Bscroll.use(Pullup)
 export default {
   name: 'Scroll',
   props:{
@@ -28,11 +35,13 @@ export default {
     }
   },
   mounted(){
-    this.scroll=new bscroll(this.$refs.wrapper,{
+    this.scroll=new Bscroll(this.$refs.wrapper,{
          click:true,
-        //  freeScroll:true
-        probeType:this.probeType,
-        pullUpLoad:this.pullUpLoad
+         probeType:this.probeType,
+         pullUpLoad:this.pullUpLoad,
+         observeImage: true,
+           observeDOM: true ,
+           keepalive:true
     })
     if(this.probeType==2||this.probeType===3){
         this.scroll.on('scroll',(position)=>{
@@ -54,11 +63,13 @@ export default {
     },
     finishPullUp(){
         this.scroll && this.scroll.finishPullUp()
+    },
+    getScrollY(){
+        return  this.scroll.y;
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

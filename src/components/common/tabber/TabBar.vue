@@ -15,9 +15,9 @@ export default {
 <style>
 #tab{
   display:flex;
-
   font-size:16px;
-  background-color: #f6f6f6;
+  background-color: #f5f5f5;
+  height:49px;
   position:fixed;
   left:0;
   right:0;

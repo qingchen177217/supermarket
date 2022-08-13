@@ -1,6 +1,6 @@
 <template>
    <div>
-  <main-bar>
+    <main-bar class="nav-bar">
         <div slot="left" class="back" @click="backClick">
             <img src="@/assets/img/common/back.svg" alt="">
         </div>
@@ -11,7 +11,7 @@
             @click="titleClick(index)"
             >{{item}}</div>
         </div>
-  </main-bar>
+     </main-bar>
    </div>
 </template>
 
@@ -42,19 +42,20 @@ export default {
 </script>
 
 <style scoped>
+   .nav-bar{
+    position: relative;
+    z-index:9;
+    background-color:#fff;
+    }
      .title{
         display:flex;
-        
+        justify-content: space-around;
      }
      .title-item{
-        flex:1;
         font-size:14px;
         font-weight:700;
      }
      .active{
         color:var(--color-tint)
-     }
-     .back{
-        margin-top:5px;
      }
 </style>

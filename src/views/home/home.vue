@@ -27,9 +27,9 @@
             <img src="@/assets/img/swiper/6.jpg" alt="">
         </swiper-item>
      </swiper> -->
-    <scroll class="content" 
+    <scroll class="content-1" 
             ref="scroll" 
-            :probeType="3" 
+            :probeType=3
             @scroll="contentScroll"
             :pullUpLoad="true"
             @pullingUp="loadMore"
@@ -37,7 +37,7 @@
          <swiper>   
         <swiper-item v-for="item in banners"> 
             <a :href="item.link">
-            <img :src="item.image" alt="" @load="imageLoad">
+            <img :src="item.image" alt="">
             </a>
         </swiper-item>
          </swiper>
@@ -62,14 +62,14 @@ import TabControl from '@/components/context/tabcontrol/tabcontrol.vue'
 import GoodsList from '@/components/context/goods/goodslist.vue'
 import Scroll from '@/components/common/scroll/scroll.vue'
 import BackTop from '@/components/context/backTop/BackTop.vue'
-
+import {debounce} from '@/common/utils'
 //项目组件
 import RecommendView from './child/recommend.views.vue'
 import FeatureView from './child/FeatureView.vue';
 
 //网络请求方法
-import {getHomeData,getHomeGoods} from '../../network/home';
-import {debounce} from '@/common/utils'
+import {getHomeData,getHomeGoods} from '@/network/home';
+
 
 
 export default {
@@ -99,7 +99,7 @@ export default {
            tabOffsetTop:0,
            isload:false,//轮播图的数据，是否下载来判定只加载几次，后续封装组件后，这个数据应该放在组件里面
            isTabFixed:false,//和上面的taboffsettop进行对比，如果小于则为false，如果为true则绑定样式fixed来让他固定在顶部
-        //    saveY:0
+           saveY:0
         }
     },
     computed:{
@@ -120,6 +120,13 @@ export default {
         this.$bus.$on('itemImageLoad',() => {
                refresh()
         })
+    },
+    activated(){
+        this.$refs.scroll.refresh();
+        this.$refs.scroll.scrollTo(0,this.saveY,0)
+    },
+    deactivated(){
+        this.saveY=this.$refs.scroll.getScrollY()
     },
     methods:{
         itemclick(index){
@@ -158,19 +165,12 @@ export default {
         },
         contentScroll(position){
             this.isshow=-position.y>1000;
-
             // 检测滚动，当滚动到一定高度进行改变istabfixed
-            this.isTabFixed=-position.y>this.tabOffsetTop
+            this.isTabFixed=-position.y>663;
         },
         loadMore(){
             this.getHomeGoods(this.currentType)
         },
-        imageLoad(){
-             if(!this.isload){
-                this.tabOffsetTop=this.$refs.tabControl2.$el.offsetTop;  
-                this.isload=true;
-             }
-        }
     }
 }
 </script>
@@ -184,7 +184,7 @@ export default {
         background-color: var(--color-tint);
         color:#fff;
      }
-     .content{
+     .content-1{
        position:absolute;
        top:43px;
        bottom:53px;
